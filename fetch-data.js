@@ -1,18 +1,21 @@
 import fs from "fs";
 import path from "node:path";
 
-const url = "https://data.cityofnewyork.us/resource/tg4x-b46p.json?$where=eventtype='Shooting Permit'&$order=startdatetime DESC&$limit=25";
+const url = "https://data.cityofnewyork.us/resource/6xgr-kwjq.json";
 const response = await fetch(url);
-const permits = await response.json();
-const manhattan = permits.filter(d => d.borough === "MANHATTAN");
 
-console.log(`Filtered ${manhattan.length} permits from Manhattan.`);
+if (!response.ok) {
+	throw new Error(`Failed to fetch police data: ${response.status}`);
+}
+
+const policeRecords = await response.json();
+console.log(`Fetched ${policeRecords.length} police records.`);
 
 const dataDir = path.join("src", "lib", "data");
 fs.mkdirSync(dataDir, { recursive: true });
 
-const outputPath = path.join(dataDir, "permits.json");
-fs.writeFileSync(outputPath, JSON.stringify(permits, null, 2));
+const outputPath = path.join(dataDir, "police.json");
+fs.writeFileSync(outputPath, JSON.stringify(policeRecords, null, 2));
 console.log(`Saved to ${outputPath}`);
 
 

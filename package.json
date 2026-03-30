@@ -3,7 +3,7 @@
   "//name": "The name of your project. Change this when you create a new site.",
   "//scripts": "Commands you can run: 'npm run dev' starts a local server, 'npm run build' creates the final site.",
   "//devDependencies": "The packages this project needs. They are installed when you run 'npm install'.",
-  "name": "cuny-jour-static-site-template",
+  "name": "ccrb-nypd",
   "version": "1.0.0",
   "private": true,
   "scripts": {
